@@ -1,8 +1,7 @@
 (ns remind-me.views
   (:require [re-frame.core :as re-frame]
             [goog.dom :as gdom]
-            [ajax.core :refer [POST]]
-            [timothypratley.reanimated.core :as anim]))
+            [ajax.core :refer [POST]]))
 
 (defn add-form []
   (let [get-reminder-data #(.-value (gdom/getElement "add-reminder-input"))
@@ -21,20 +20,29 @@
                         (get-reminder-data))
                       (clear-input))} "Add"]]))
 
-(defn reminders-list [loading reminders]
-  [anim/pop-when
-   (not @loading)
-   [:ul#reminder-list
-    (for [{:keys [id name]} @reminders]
-      ^{:key id}
-      [:li {:on-click #(re-frame/dispatch [:remove-reminder id])}
-       name])]])
+(def ctg (reagent.core/adapt-react-class js/React.addons.CSSTransitionGroup))
+
+(defn reminders-list [reminders]
+  (let [set-cls-inactive (fn [id]
+                           (set! (.-className
+                                   (gdom/getElement id))
+                                 "removing"))]
+    [:div
+     [:ul#reminder-list
+      [ctg {:transition-name "foo"}
+       (for [{:keys [id name]} @reminders]
+         (let [el-id (str "liid" id)]
+           ^{:key id} [:li {:id       el-id
+                            :on-click #(do
+                                        (set-cls-inactive el-id)
+                                        (re-frame/dispatch [:remove-reminder id]))}
+                       name]))]
+      ]]))
 
 (defn main-panel []
-  (let [reminders (re-frame/subscribe [:reminders])
-        loading   (re-frame/subscribe [:loading?])]
+  (let [reminders (re-frame/subscribe [:reminders])]
     (fn []
       [:div
        [:h2#title.center "Tiny Reminder"]
        [add-form]
-       [reminders-list loading reminders]])))
+       [reminders-list reminders]])))

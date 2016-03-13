@@ -10,14 +10,14 @@
 
 (defn remove-reminder-request [id]
   (POST "/remove-reminder" {:params        {:id id}
-                            :handler       #(dispatch [:sync-db])
+                            :handler       println
                             :error-handler println
                             :format        :json
                             :keywords?     true}))
 
 (defn add-reminder-request [name]
   (POST "/add-reminder" {:params        {:name name}
-                         :handler       #(dispatch [:sync-db])
+                         :handler       println
                          :error-handler println
                          :format        :json
                          :keywords?     true}))

@@ -1,7 +1,8 @@
 (defproject remind-me "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
-                 [reagent "0.5.1"]
+                 [reagent "0.5.1" :exclusions [cljsjs/react]]
+                 [cljsjs/react-with-addons "0.13.3-0"]
                  [re-frame "0.6.0"]
                  [compojure "1.4.0"]
                  [ring "1.4.0"]
@@ -9,8 +10,7 @@
                  [com.layerware/hugsql "0.4.0"]
                  [cljs-ajax "0.5.3"]
                  [ring/ring-json "0.4.0"]
-                 [org.clojure/data.json "0.2.6"]
-                 [timothypratley/reanimated "0.1.4"]]
+                 [org.clojure/data.json "0.2.6"]]
 
   :min-lein-version "2.5.3"
 

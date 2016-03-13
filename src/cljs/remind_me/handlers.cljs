@@ -27,6 +27,9 @@
   (fn [db [_ name]]
     (requests/add-reminder-request name)
     (requests/get-reminders-request)
+    (comment
+      "handle in cljs?"
+      (update-in db [:reminders] #(conj % {:id (random-uuid) :name name})))
     db))
 
 (register-handler
@@ -34,4 +37,9 @@
   (fn [db [_ id]]
     (requests/remove-reminder-request id)
     (requests/get-reminders-request)
+    (comment
+      "handle in cljs?"
+      (update-in db [:reminders] (fn [reminders]
+                                   (filter #(not= id (:id %))
+                                           reminders))))
     db))

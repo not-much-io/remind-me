@@ -16,6 +16,28 @@ body {
     margin-bottom: 0.5em;
 }
 
-#sync-lbl {
-    margin-left:  2em;
+li {
+    height: 1.5em;
+    line-height: 1.5em;
+    overflow: hidden;
+}
+
+.foo-enter {
+    height: 0;
+    transition: height 0.27s ease-out;
+}
+
+.foo-leave {
+    height: 0;
+    transition: height 0.27s ease-out;
+}
+
+.foo-enter-active {
+    height: 1.5em;
+    opacity: 1;
+}
+
+.removing {
+    color: grey;
+    opacity: 0.5;
 }
