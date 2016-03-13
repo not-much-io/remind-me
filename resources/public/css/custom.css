@@ -1,0 +1,21 @@
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+body {
+    margin: 8em;
+}
+
+#reminder-list {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+#title {
+    margin-bottom: 0.5em;
+}
+
+#sync-lbl {
+    margin-left:  2em;
+}
