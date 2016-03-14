@@ -1,1 +1,1 @@
-web: lein figwheel dev
+production: lein figwheel dev
