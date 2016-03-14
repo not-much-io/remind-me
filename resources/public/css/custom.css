@@ -22,7 +22,6 @@ body {
 li {
     height: 2em;
     overflow: hidden;
-    border-top: 0.1em solid grey;
     border-bottom: 0.1em solid grey;
 }
 
@@ -35,12 +34,12 @@ li:hover {
 
 .foo-enter {
     height: 0;
-    transition: height 0.27s linear;
+    transition: height 0.27s ease-in-out;
 }
 
 .foo-leave {
     height: 0;
-    transition: height 0.27s linear;
+    transition: height 0.27s ease-in-out;
 }
 
 .foo-enter-active {
