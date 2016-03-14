@@ -1,11 +1,8 @@
 (defproject remind-me "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
-
-                 [cljsjs/react "0.13.3-1"]
-                 [cljsjs/react-motion "0.4.1-1"]
-                 [reagent "0.5.1"]
-
+                 [reagent "0.5.1" :exclusions [cljsjs/react]]
+                 [cljsjs/react-with-addons "0.13.3-0"]
                  [re-frame "0.6.0"]
                  [compojure "1.4.0"]
                  [ring "1.4.0"]

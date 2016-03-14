@@ -4,12 +4,15 @@
 }
 
 body {
-    margin: 8em;
+    margin: 5em;
 }
 
 #reminder-list {
     margin-left: 3em;
     margin-right: 3em;
+    min-height: 20em;
+    height: 20em;
+    overflow: auto;
 }
 
 #title {
@@ -17,23 +20,31 @@ body {
 }
 
 li {
-    height: 1.5em;
-    line-height: 1.5em;
+    height: 2em;
     overflow: hidden;
+    border-top: 0.1em solid grey;
+    border-bottom: 0.1em solid grey;
 }
+
+/*
+li:hover {
+    transform: scale(1.1, 1.1);
+    transition: transform 0.27s ease-out;
+}
+*/
 
 .foo-enter {
     height: 0;
-    transition: height 0.27s ease-out;
+    transition: height 0.27s linear;
 }
 
 .foo-leave {
     height: 0;
-    transition: height 0.27s ease-out;
+    transition: height 0.27s linear;
 }
 
 .foo-enter-active {
-    height: 1.5em;
+    height: 2em;
     opacity: 1;
 }
 

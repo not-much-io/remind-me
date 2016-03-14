@@ -17,7 +17,7 @@
         (assoc :error "Aww shit!"))))
 
 (register-handler
-  :sync-db
+  :sync-reminders
   (fn [db _]
     (requests/get-reminders-request)
     (assoc db :loading? true)))
@@ -26,9 +26,12 @@
   :add-reminder
   (fn [db [_ name]]
     (requests/add-reminder-request name)
-    (requests/get-reminders-request)
     (comment
-      "handle in cljs?"
+      "Handle manually"
+      (requests/get-reminders-request))
+    (comment
+      "Handle in cljs?"
+      ; Don't have id..
       (update-in db [:reminders] #(conj % {:id (random-uuid) :name name})))
     db))
 
@@ -36,9 +39,11 @@
   :remove-reminder
   (fn [db [_ id]]
     (requests/remove-reminder-request id)
-    (requests/get-reminders-request)
     (comment
-      "handle in cljs?"
+      "Handle manually?"
+      (requests/get-reminders-request))
+    (comment
+      "Handle in cljs?"
       (update-in db [:reminders] (fn [reminders]
                                    (filter #(not= id (:id %))
                                            reminders))))

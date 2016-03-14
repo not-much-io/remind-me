@@ -1,8 +1,7 @@
 (ns remind-me.views
   (:require [re-frame.core :as re-frame]
             [goog.dom :as gdom]
-            [ajax.core :refer [POST]]
-            [remind-me.motion :as motion]))
+            [ajax.core :refer [POST]]))
 
 (defn add-form []
   (let [get-reminder-data #(.-value (gdom/getElement "add-reminder-input"))
@@ -21,41 +20,24 @@
                         (get-reminder-data))
                       (clear-input))} "Add"]]))
 
+(def ctg (reagent.core/adapt-react-class js/React.addons.CSSTransitionGroup))
+
 (defn reminders-list [reminders]
   (let [set-cls-inactive (fn [id]
                            (set! (.-className
                                    (gdom/getElement id))
                                  "removing"))]
-    [:div
+    [:div#list-container
      [:ul#reminder-list
-      (for [{:keys [id name]} @reminders]
-        (let [el-id (str "li-id" id)]
-          ^{:key id} [:li {:id       el-id
-                           :on-click #(do
-                                       (set-cls-inactive el-id)
-                                       (re-frame/dispatch [:remove-reminder id]))}
-                      name]))]]))
+      [ctg {:transition-name "foo"}
+       (for [{:keys [id name]} @reminders]
+         (let [el-id (str "li-id" id)]
+           ^{:key id} [:li {:id       el-id
+                            :on-click #(do
+                                        (set-cls-inactive el-id)
+                                        (re-frame/dispatch [:remove-reminder id]))}
+                       name]))]]]))
 
-(def reminders-list-comp
-  (reagent.core/reactify-component reminders-list))
-
-(defn- will-leave []
-  (js-obj "height"  (motion/spring 0)
-          "opacity" (motion/spring 0)))
-
-(defn- will-enter []
-  (js-obj "height"  (motion/spring 0)
-          "opacity" (motion/spring 1)))
-
-(defn reminders-list-motion [reminders]
-  [motion/TransitionMotion {:willLeave will-leave
-                            :styles    (map (fn [{:keys [id name]}]
-                                              (js-obj "key" id
-                                                      "style" (js-obj "height" 10))) @reminders)}
-   (fn [configs]
-     (reagent.core/create-element reminders-list-comp
-                                  #js {}
-                                  [configs reminders]))])
 
 (defn main-panel []
   (let [reminders (re-frame/subscribe [:reminders])]
