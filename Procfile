@@ -1,1 +1,1 @@
-production: lein figwheel dev
+production: lein clean && lein cljsbuild once min
