@@ -16,6 +16,8 @@
 
   :source-paths ["src/clj"]
 
+  :main remind-me.core
+
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-figwheel "0.5.0-2"]]
 
