@@ -10,7 +10,7 @@
                  [compojure "1.4.0"]
                  [ring "1.4.0"]
                  [org.xerial/sqlite-jdbc "3.7.2"]
-                 [com.layerware/hugsql "0.4.0"]
+                 [com.layerware/hugsql "0.4.4"]
                  [cljs-ajax "0.5.3"]
                  [ring/ring-json "0.4.0"]
                  [org.clojure/data.json "0.2.6"]]

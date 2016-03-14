@@ -3,6 +3,6 @@
 
 (def db-spec {:classname "org.sqlite.JDBC"
               :subprotocol "SQLite"
-              :subname "/home/not-much-io/Projects/remind-me/resources/private/remind-me.db"})
+              :subname "C:\\Users\\KKoert\\Documents\\Sandbox\\remind-me\\resources\\private\\remind-me.db"})
 
 (hugsql/def-db-fns "remind_me/queries/queries.sql")
